@@ -14,4 +14,10 @@ class MoneyTest {
         val product2 = five.times(3)
         assertEquals(15, product2.amount)
     }
+
+    @Test
+    fun testEquality() {
+        assertTrue(Dollar(5) == Dollar(5))
+        assertFalse(Dollar(5) == Dollar(6))
+    }
 }
