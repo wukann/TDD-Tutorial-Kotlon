@@ -21,7 +21,7 @@ class Money(private val amount: Int, private val mCurrency: String): Expression 
     }
 
     fun plus(added: Money): Expression {
-        return Money(amount + added.amount, currency)
+        return Sum(this, added)
     }
 
     override fun equals(other: Any?): Boolean {
