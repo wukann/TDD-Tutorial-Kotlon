@@ -1,6 +1,6 @@
 package money
 
-abstract class Money(protected val amount: Int, private val mCurrency: String) {
+open class Money(protected val amount: Int, private val mCurrency: String) {
 
     companion object {
 
@@ -16,11 +16,17 @@ abstract class Money(protected val amount: Int, private val mCurrency: String) {
     val currency: String
         get() = mCurrency
 
-    abstract fun times(multiplier: Int): Money
+    fun times(multiplier: Int): Money {
+        return Money(amount * multiplier, currency)
+    }
 
     override fun equals(other: Any?): Boolean {
         val money = other as Money
         return amount == money.amount
-                && javaClass == other.javaClass
+                && currency == money.currency
+    }
+
+    override fun toString(): String {
+        return "$amount $currency"
     }
 }
