@@ -1,6 +1,6 @@
 package money
 
-class Money(private val amount: Int, private val mCurrency: String): Expression {
+class Money(val amount: Int, private val mCurrency: String): Expression {
 
     companion object {
 
@@ -22,6 +22,10 @@ class Money(private val amount: Int, private val mCurrency: String): Expression 
 
     fun plus(added: Money): Expression {
         return Sum(this, added)
+    }
+
+    override fun reduce(to: String): Money {
+        return this
     }
 
     override fun equals(other: Any?): Boolean {
