@@ -1,17 +1,20 @@
 package money
 
-abstract class Money(protected val amount: Int) {
+abstract class Money(protected val amount: Int, private val mCurrency: String) {
 
     companion object {
 
         fun dollar(amount: Int): Money {
-            return Dollar(amount)
+            return Dollar(amount, "USD")
         }
 
         fun franc(amount: Int): Money {
-            return Franc(amount)
+            return Franc(amount, "CHF")
         }
     }
+
+    val currency: String
+        get() = mCurrency
 
     abstract fun times(multiplier: Int): Money
 
