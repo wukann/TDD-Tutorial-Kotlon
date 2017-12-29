@@ -18,17 +18,7 @@ class MoneyTest {
         assertTrue(Money.dollar(5) == Money.dollar(5))
         assertFalse(Money.dollar(5) == Money.dollar(6))
 
-        assertTrue(Money.franc(5) == Money.franc(5))
-        assertFalse(Money.franc(5) == Money.franc(6))
-
-        assertFalse(Money.dollar(5) as Money == Money.franc(5))
-    }
-
-    @Test
-    fun testFrancMultiplication() {
-        val five = Money.franc(5)
-        assertEquals(Money.franc(10), five.times(2))
-        assertEquals(Money.franc(15), five.times(3))
+        assertFalse(Money.dollar(5) == Money.franc(5))
     }
 
     @Test
@@ -37,8 +27,4 @@ class MoneyTest {
         assertEquals("CHF", Money.franc(1).currency)
     }
 
-    @Test
-    fun testDifferentClassEquality() {
-        assertTrue(Money(10, "USD") == Dollar(10, "USD"))
-    }
 }
