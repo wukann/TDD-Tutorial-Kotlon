@@ -1,6 +1,6 @@
 package money
 
-open class Money(protected val amount: Int, private val mCurrency: String) {
+open class Money(private val amount: Int, private val mCurrency: String) {
 
     companion object {
 
