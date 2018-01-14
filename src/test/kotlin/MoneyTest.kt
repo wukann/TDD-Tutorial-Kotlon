@@ -1,7 +1,8 @@
 package money
 
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 
 class MoneyTest {
@@ -9,22 +10,22 @@ class MoneyTest {
     @Test
     fun testMultiplication() {
         val five = Money.dollar(5)
-        assertEquals(Money.dollar(10), five.times(2))
-        assertEquals(Money.dollar(15), five.times(3))
+        assertThat(Money.dollar(10), `is`(five.times(2)))
+        assertThat(Money.dollar(15), `is`(five.times(3)))
     }
 
     @Test
     fun testEquality() {
-        assertTrue(Money.dollar(5) == Money.dollar(5))
-        assertFalse(Money.dollar(5) == Money.dollar(6))
+        assertThat(Money.dollar(5) == Money.dollar(5), `is`(true))
+        assertThat(Money.dollar(5) == Money.dollar(6), `is`(false))
 
-        assertFalse(Money.dollar(5) == Money.franc(5))
+        assertThat(Money.dollar(5) == Money.franc(5), `is`(false))
     }
 
     @Test
     fun testCurrency() {
-        assertEquals("USD", Money.dollar(1).currency)
-        assertEquals("CHF", Money.franc(1).currency)
+        assertThat(Money.dollar(1).currency, `is`("USD"))
+        assertThat(Money.franc(1).currency, `is`("CHF"))
     }
 
     @Test
@@ -33,7 +34,7 @@ class MoneyTest {
         val sum = five.plus(five)
         val bank = Bank()
         val reduced = bank.reduce(sum, "USD")
-        assertEquals(Money.dollar(10), reduced)
+        assertThat(reduced, `is`(Money.dollar(10)))
     }
 
     @Test
@@ -41,8 +42,8 @@ class MoneyTest {
         val five = Money.dollar(5)
         val result = five.plus(five)
         val sum = result as Sum
-        assertEquals(five, sum.augend)
-        assertEquals(five, sum.addend)
+        assertThat(sum.augend, `is`(five))
+        assertThat(sum.addend, `is`(five))
     }
 
     @Test
@@ -50,13 +51,13 @@ class MoneyTest {
         val sum = Sum(Money.dollar(3), Money.dollar(4)) as Expression
         val bank = Bank()
         val result = bank.reduce(sum, "USD")
-        assertEquals(Money.dollar(7), result)
+        assertThat(result, `is`(Money.dollar(7)))
     }
 
     @Test
     fun testReduceMoney() {
         val bank = Bank()
         val result = bank.reduce(Money.dollar(1), "USD")
-        assertEquals(Money.dollar(1), result)
+        assertThat(result, `is`(Money.dollar(1)))
     }
 }
