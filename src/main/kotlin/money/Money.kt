@@ -16,11 +16,11 @@ class Money(val amount: Int, private val mCurrency: String): Expression {
     val currency: String
         get() = mCurrency
 
-    fun times(multiplier: Int): Money {
+    fun times(multiplier: Int): Expression {
         return Money(amount * multiplier, currency)
     }
 
-    fun plus(added: Money): Expression {
+    override fun plus(added: Expression): Expression {
         return Sum(this, added)
     }
 

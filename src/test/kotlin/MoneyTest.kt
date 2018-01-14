@@ -42,8 +42,8 @@ class MoneyTest {
         val five = Money.dollar(5)
         val result = five.plus(five)
         val sum = result as Sum
-        assertThat(sum.augend, `is`(five))
-        assertThat(sum.addend, `is`(five))
+        assertThat(sum.augend, `is`(five as Expression))
+        assertThat(sum.addend, `is`(five as Expression))
     }
 
     @Test
@@ -74,4 +74,13 @@ class MoneyTest {
         assertThat(Bank().rate("USD", "USD"), `is`(1))
     }
 
+    @Test
+    fun testMixedAddition() {
+        val fiveBucks: Expression = Money.dollar(5)
+        val tenFrancs: Expression = Money.franc(10)
+        val bank = Bank()
+        bank.addRate("CHF", "USD", 2)
+        val result = bank.reduce(fiveBucks.plus(tenFrancs), "USD")
+        assertThat(result, `is`(Money.dollar(10)))
+    }
 }
