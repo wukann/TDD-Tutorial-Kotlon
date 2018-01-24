@@ -2,7 +2,7 @@ package money
 
 class Sum(val augend: Expression, val addend: Expression) : Expression {
     override fun plus(added: Expression): Expression {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Sum(this, added)
     }
 
     override fun reduce(bank: Bank, to: String): Money {
